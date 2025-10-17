@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { TaskCard } from '../components/TaskCard';
 import { TaskForm } from '../components/TaskForm';
+import { ConfirmModal } from '../components/ConfirmModal';
 import { taskService } from '../services/taskService';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../hooks/useToast';
+import { useConfirmModal } from '../hooks/useConfirmModal';
 import type { Task, TaskStatus } from '../types/task';
 
 export const DashboardPage = () => {
@@ -14,6 +16,7 @@ export const DashboardPage = () => {
   const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth();
   const { showSuccess, showError } = useToast();
+  const { modalState, showConfirm, hideConfirm, handleConfirm } = useConfirmModal();
 
   useEffect(() => {
     loadTasks();
@@ -55,16 +58,28 @@ export const DashboardPage = () => {
     }
   };
 
-  const handleDeleteTask = async (id: string) => {
-    if (!confirm('Tem certeza que deseja excluir esta tarefa?')) return;
-
-    try {
-      await taskService.delete(id);
-      await loadTasks();
-      showSuccess('Tarefa excluída com sucesso!');
-    } catch (err: any) {
-      showError(err.response?.data?.error || 'Erro ao excluir tarefa');
-    }
+  const handleDeleteTask = (id: string) => {
+    const task = tasks.find(t => t.id === id);
+    const taskTitle = task ? task.titulo : 'esta tarefa';
+    
+    showConfirm(
+      'Confirmar Exclusão',
+      `Tem certeza que deseja excluir "${taskTitle}"? Esta ação não pode ser desfeita.`,
+      async () => {
+        try {
+          await taskService.delete(id);
+          await loadTasks();
+          showSuccess('Tarefa excluída com sucesso!');
+        } catch (err: any) {
+          showError(err.response?.data?.error || 'Erro ao excluir tarefa');
+        }
+      },
+      {
+        confirmText: 'EXCLUIR',
+        cancelText: 'CANCELAR',
+        type: 'danger'
+      }
+    );
   };
 
   const handleStatusChange = async (id: string, status: TaskStatus) => {
@@ -261,6 +276,18 @@ export const DashboardPage = () => {
           </div>
         )}
       </div>
+
+      {/* Confirm Modal */}
+      <ConfirmModal
+        isOpen={modalState.isOpen}
+        title={modalState.title}
+        message={modalState.message}
+        confirmText={modalState.confirmText}
+        cancelText={modalState.cancelText}
+        type={modalState.type}
+        onConfirm={handleConfirm}
+        onCancel={hideConfirm}
+      />
     </div>
   );
 };
