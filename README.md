@@ -58,8 +58,12 @@ cd DesafioTecnico-ExecutivaService
 # Entrar na pasta do backend
 cd backend
 
-# Instalar dependências
+# Instalar todas as dependências
 npm install
+
+# Ou instalar dependências específicas (caso necessário):
+# npm install @prisma/client bcrypt cors dotenv express jsonwebtoken
+# npm install -D @types/bcrypt @types/cors @types/express @types/jsonwebtoken @types/node prisma ts-node-dev typescript
 
 # Configurar variáveis de ambiente
 cp env.example .env
@@ -100,8 +104,12 @@ npm run dev
 # Abrir novo terminal na pasta raiz
 cd frontend
 
-# Instalar dependências
+# Instalar todas as dependências
 npm install
+
+# Ou instalar dependências específicas (caso necessário):
+# npm install axios react react-dom react-router-dom
+# npm install -D @eslint/js @tailwindcss/postcss @types/node @types/react @types/react-dom @vitejs/plugin-react autoprefixer eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals postcss tailwindcss typescript typescript-eslint vite
 
 # Iniciar o servidor de desenvolvimento
 npm run dev
@@ -209,6 +217,28 @@ EXECUTIVA SERVICE/
    - Alterar status das tarefas
    - Modal de confirmação
    - Sistema de notificações
+
+## Instalação Completa de Dependências
+
+### Backend - Dependências de Produção
+```bash
+npm install @prisma/client bcrypt cors dotenv express jsonwebtoken
+```
+
+### Backend - Dependências de Desenvolvimento
+```bash
+npm install -D @types/bcrypt @types/cors @types/express @types/jsonwebtoken @types/node prisma ts-node-dev typescript
+```
+
+### Frontend - Dependências de Produção
+```bash
+npm install axios react react-dom react-router-dom
+```
+
+### Frontend - Dependências de Desenvolvimento
+```bash
+npm install -D @eslint/js @tailwindcss/postcss @types/node @types/react @types/react-dom @vitejs/plugin-react autoprefixer eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals postcss tailwindcss typescript typescript-eslint vite
+```
 
 ## Stack de Desenvolvimento
 
