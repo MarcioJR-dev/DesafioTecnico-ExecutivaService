@@ -1,29 +1,8 @@
 import api from './api';
+import type { Task, TaskStatus, CreateTaskData, UpdateTaskData } from '../types/task';
 
-export type TaskStatus = 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDA';
-
-export interface Task {
-  id: string;
-  titulo: string;
-  descricao: string;
-  status: TaskStatus;
-  dataCriacao: string;
-  dataConclusao: string | null;
-  userId: string;
-}
-
-interface CreateTaskData {
-  titulo: string;
-  descricao: string;
-  status?: TaskStatus;
-}
-
-interface UpdateTaskData {
-  titulo?: string;
-  descricao?: string;
-  status?: TaskStatus;
-  dataConclusao?: string | null;
-}
+// Re-exportar os tipos para compatibilidade
+export type { Task, TaskStatus, CreateTaskData, UpdateTaskData };
 
 export const taskService = {
   async getAll(): Promise<Task[]> {
