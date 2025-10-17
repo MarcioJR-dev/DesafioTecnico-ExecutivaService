@@ -1,20 +1,20 @@
-# 🏛️ EXECUTIVA SERVICE
+# EXECUTIVA SERVICE
 
-**SAUDAÇÕES tech recruiter! 👋**
+**SAUDAÇÕES tech recruiter!**
 
 Bem-vindo ao **EXECUTIVA SERVICE** - uma aplicação web profissional de gerenciamento de tarefas desenvolvida especificamente para escritórios de advocacia. Este projeto demonstra habilidades em desenvolvimento full-stack com foco em design elegante, segurança e experiência do usuário.
 
-## 🎯 Sobre o Projeto
+## Sobre o Projeto
 
 O **EXECUTIVA SERVICE** é uma plataforma de gestão de tarefas que simula os serviços de uma secretária jurídica remota. A aplicação oferece uma interface elegante e profissional, perfeita para o ambiente corporativo jurídico, com design minimalista em preto, branco e detalhes dourados.
 
-### 🎨 Design Philosophy
+### Design Philosophy
 - **Elegância Profissional**: Design limpo e sofisticado adequado para advocacia
 - **Tipografia Formal**: Uso de fontes serifadas (Crimson Text + Playfair Display)
 - **Paleta Corporativa**: Preto, branco e detalhes dourados
 - **UX Intuitiva**: Interface responsiva e acessível
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend (Node.js + TypeScript)
 - **Node.js** v18+ - Runtime JavaScript
@@ -35,12 +35,7 @@ O **EXECUTIVA SERVICE** é uma plataforma de gestão de tarefas que simula os se
 - **Axios** v1.12.2 - Cliente HTTP
 - **Google Fonts** - Tipografia profissional
 
-### DevOps & Deploy
-- **Railway** - Deploy do backend (PostgreSQL + Node.js)
-- **Vercel** - Deploy do frontend (React)
-- **GitHub** - Controle de versão
-
-## 📋 Pré-requisitos
+## Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado:
 
@@ -49,7 +44,7 @@ Antes de começar, certifique-se de ter instalado:
 - **PostgreSQL** (versão 12 ou superior)
 - **Git**
 
-## 🛠️ Como Executar o Projeto
+## Como Executar o Projeto
 
 ### 1. Clone o Repositório
 ```bash
@@ -97,7 +92,7 @@ npm run prisma:migrate
 npm run dev
 ```
 
-✅ **Backend rodando em:** `http://localhost:3001`
+**Backend rodando em:** `http://localhost:3001`
 
 ### 3. Configuração do Frontend
 
@@ -112,52 +107,52 @@ npm install
 npm run dev
 ```
 
-✅ **Frontend rodando em:** `http://localhost:5173`
+**Frontend rodando em:** `http://localhost:5173`
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 EXECUTIVA SERVICE/
-├── 📁 backend/                    # API Node.js + TypeScript
-│   ├── 📁 prisma/                # Schema e migrations
+├── backend/                    # API Node.js + TypeScript
+│   ├── prisma/                # Schema e migrations
 │   │   ├── schema.prisma         # Modelos de dados
 │   │   └── migrations/           # Histórico de mudanças do DB
-│   ├── 📁 src/
-│   │   ├── 📁 controllers/       # Lógica de negócio
-│   │   ├── 📁 middlewares/       # Autenticação, logs, erros
-│   │   ├── 📁 routes/           # Definição de rotas
-│   │   ├── 📁 config/           # Configurações (CORS, etc)
-│   │   ├── 📁 utils/            # Utilitários e validações
+│   ├── src/
+│   │   ├── controllers/       # Lógica de negócio
+│   │   ├── middlewares/       # Autenticação, logs, erros
+│   │   ├── routes/           # Definição de rotas
+│   │   ├── config/           # Configurações (CORS, etc)
+│   │   ├── utils/            # Utilitários e validações
 │   │   └── server.ts            # Servidor principal
 │   └── package.json
 │
-├── 📁 frontend/                   # React + TypeScript
-│   ├── 📁 src/
-│   │   ├── 📁 components/        # Componentes reutilizáveis
+├── frontend/                   # React + TypeScript
+│   ├── src/
+│   │   ├── components/        # Componentes reutilizáveis
 │   │   │   ├── ConfirmModal.tsx  # Modal de confirmação elegante
 │   │   │   ├── Toast.tsx         # Notificações personalizadas
 │   │   │   ├── Navbar.tsx        # Barra de navegação
 │   │   │   └── ...
-│   │   ├── 📁 pages/            # Páginas da aplicação
-│   │   ├── 📁 hooks/            # Custom hooks (useToast, useConfirmModal)
-│   │   ├── 📁 services/         # Comunicação com API
-│   │   ├── 📁 context/          # Context API (AuthContext)
-│   │   └── 📁 types/            # Definições TypeScript
+│   │   ├── pages/            # Páginas da aplicação
+│   │   ├── hooks/            # Custom hooks (useToast, useConfirmModal)
+│   │   ├── services/         # Comunicação com API
+│   │   ├── context/          # Context API (AuthContext)
+│   │   └── types/            # Definições TypeScript
 │   └── package.json
 │
 └── README.md
 ```
 
-## 🔌 API Endpoints
+## API Endpoints
 
-### 🔐 Autenticação
+### Autenticação
 
 | Método | Endpoint | Descrição | Body |
 |--------|----------|-----------|------|
 | `POST` | `/api/auth/signup` | Cadastrar usuário | `{ nome, email, password }` |
 | `POST` | `/api/auth/signin` | Login | `{ email, password }` |
 
-### 📝 Tarefas (Requerem JWT)
+### Tarefas (Requerem JWT)
 
 | Método | Endpoint | Descrição | Headers |
 |--------|----------|-----------|---------|
@@ -167,55 +162,43 @@ EXECUTIVA SERVICE/
 | `PUT` | `/api/tasks/:id` | Atualizar tarefa | `Authorization: Bearer {token}` |
 | `DELETE` | `/api/tasks/:id` | Excluir tarefa | `Authorization: Bearer {token}` |
 
-### 🏥 Health Check
+### Health Check
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
 | `GET` | `/health` | Status do servidor |
 
-## ✨ Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
-### 🔐 Sistema de Autenticação
-- ✅ **Cadastro seguro** com validações
-- ✅ **Login com JWT** e expiração de token
-- ✅ **Proteção de rotas** no backend e frontend
-- ✅ **Criptografia de senhas** com bcrypt
-- ✅ **Logout seguro**
+### Sistema de Autenticação
+- **Cadastro seguro** com validações
+- **Login com JWT** e expiração de token
+- **Proteção de rotas** no backend e frontend
+- **Criptografia de senhas** com bcrypt
+- **Logout seguro**
 
-### 📋 Gerenciamento de Tarefas
-- ✅ **CRUD completo** de tarefas
-- ✅ **Organização por status** (Pendente, Em Andamento, Concluída)
-- ✅ **Interface drag-and-drop** visual
-- ✅ **Validações em tempo real**
-- ✅ **Histórico de datas** (criação e conclusão)
+### Gerenciamento de Tarefas
+- **CRUD completo** de tarefas
+- **Organização por status** (Pendente, Em Andamento, Concluída)
+- **Interface visual** organizada
+- **Validações em tempo real**
+- **Histórico de datas** (criação e conclusão)
 
-### 🎨 Interface e UX
-- ✅ **Design responsivo** (mobile-first)
-- ✅ **Tipografia profissional** (serifadas)
-- ✅ **Sistema de toast** personalizado
-- ✅ **Modal de confirmação** elegante
-- ✅ **Loading states** e feedback visual
-- ✅ **Animações suaves** e transições
+### Interface e UX
+- **Design responsivo** (mobile-first)
+- **Tipografia profissional** (serifadas)
+- **Sistema de toast** personalizado
+- **Modal de confirmação** elegante
+- **Loading states** e feedback visual
+- **Animações suaves** e transições
 
-### 🛡️ Segurança e Qualidade
-- ✅ **Validações de entrada** robustas
-- ✅ **Tratamento de erros** com códigos HTTP
-- ✅ **CORS configurado** para produção
-- ✅ **TypeScript** em todo o projeto
-- ✅ **Padrões de commit** semânticos
+### Segurança e Qualidade
+- **Validações de entrada** robustas
+- **Tratamento de erros** com códigos HTTP
+- **CORS configurado** adequadamente
+- **TypeScript** em todo o projeto
+- **Padrões de commit** semânticos
 
-## 🚀 Deploy em Produção
-
-### Backend (Railway)
-- **URL:** `https://desafiotecnico-executivaservice-production.up.railway.app`
-- **Banco:** PostgreSQL gerenciado pelo Railway
-- **Variáveis de ambiente** configuradas no dashboard
-
-### Frontend (Vercel)
-- **URL:** `https://desafio-tecnico-executiva-service.vercel.app`
-- **Deploy automático** via GitHub
-- **Configuração de roteamento** para SPA
-
-## 🧪 Como Testar
+## Como Testar
 
 1. **Acesse:** `http://localhost:5173`
 2. **Cadastre-se** com seus dados
@@ -227,44 +210,44 @@ EXECUTIVA SERVICE/
    - Modal de confirmação
    - Sistema de notificações
 
-## 📊 Stack de Desenvolvimento
+## Stack de Desenvolvimento
 
-### 🔧 Ferramentas de Desenvolvimento
+### Ferramentas de Desenvolvimento
 - **ESLint** - Linting de código
 - **Prettier** - Formatação automática
 - **TypeScript** - Tipagem estática
 - **Git** - Controle de versão
 
-### 📦 Gerenciamento de Dependências
+### Gerenciamento de Dependências
 - **npm** - Package manager
 - **package-lock.json** - Lock de versões
 
-### 🗄️ Banco de Dados
+### Banco de Dados
 - **PostgreSQL** - Banco relacional robusto
 - **Prisma** - ORM moderno com type-safety
 - **Migrations** - Versionamento do schema
 
-## 🎯 Diferenciais Técnicos
+## Diferenciais Técnicos
 
-### 🏗️ Arquitetura
+### Arquitetura
 - **Separação clara** entre backend e frontend
 - **Padrão MVC** no backend
 - **Componentização** no frontend
 - **Custom hooks** para lógica reutilizável
 
-### 🔒 Segurança
+### Segurança
 - **JWT** para autenticação stateless
 - **bcrypt** para hash de senhas
 - **Validações** em todas as entradas
 - **CORS** configurado adequadamente
 
-### 🎨 Design System
+### Design System
 - **Design tokens** consistentes
 - **Componentes reutilizáveis**
 - **Sistema de cores** corporativo
 - **Tipografia** profissional
 
-## 📝 Padrões de Commit
+## Padrões de Commit
 
 Este projeto segue **Conventional Commits**:
 
@@ -278,22 +261,22 @@ test: adicionar testes
 chore: tarefas de manutenção
 ```
 
-## 👨‍💻 Desenvolvedor
+## Desenvolvedor
 
 **Márcio Junior**  
 *Full Stack Developer*
 
-- 🎯 **Foco:** Desenvolvimento web moderno
-- 🛠️ **Stack:** Node.js, React, TypeScript, PostgreSQL
-- 🎨 **Design:** Interfaces elegantes e funcionais
-- 🔒 **Segurança:** Boas práticas de desenvolvimento seguro
+- **Foco:** Desenvolvimento web moderno
+- **Stack:** Node.js, React, TypeScript, PostgreSQL
+- **Design:** Interfaces elegantes e funcionais
+- **Segurança:** Boas práticas de desenvolvimento seguro
 
-## 📄 Licença
+## Licença
 
 Este projeto foi desenvolvido como parte de um **desafio técnico** para demonstração de habilidades em desenvolvimento full-stack.
 
 ---
 
-**Obrigado pela oportunidade de apresentar este projeto! 🚀**
+**Obrigado pela oportunidade de apresentar este projeto!**
 
 *Para dúvidas ou sugestões, sinta-se à vontade para entrar em contato.*
