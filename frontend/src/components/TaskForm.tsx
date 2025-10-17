@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Task, TaskStatus } from '../services/taskService';
+import type { Task, TaskStatus } from '../types/task';
 
 interface TaskFormProps {
   task?: Task | null;

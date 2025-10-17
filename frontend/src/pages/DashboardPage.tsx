@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { TaskCard } from '../components/TaskCard';
 import { TaskForm } from '../components/TaskForm';
-import { taskService, Task, TaskStatus } from '../services/taskService';
+import { taskService } from '../services/taskService';
+import type { Task, TaskStatus } from '../types/task';
 
 export const DashboardPage = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
