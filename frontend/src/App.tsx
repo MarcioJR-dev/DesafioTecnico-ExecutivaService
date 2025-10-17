@@ -4,8 +4,12 @@ import { PrivateRoute } from './components/PrivateRoute';
 import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
 import { DashboardPage } from './pages/DashboardPage';
+import { useToast } from './hooks/useToast';
+import { ToastContainer } from './components/ToastContainer';
 
 function App() {
+  const { toasts, hideToast } = useToast();
+
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -22,6 +26,7 @@ function App() {
           />
           <Route path="/" element={<Navigate to="/login" replace />} />
         </Routes>
+        <ToastContainer toasts={toasts} onHideToast={hideToast} />
       </BrowserRouter>
     </AuthProvider>
   );
