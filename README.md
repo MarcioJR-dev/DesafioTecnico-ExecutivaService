@@ -1,36 +1,57 @@
-# Task Manager - Sistema de Gerenciamento de Tarefas
+# 🏛️ EXECUTIVA SERVICE
 
-Sistema full stack de gerenciamento de tarefas com autenticação JWT, desenvolvido com Node.js/Express no backend e React/TypeScript no frontend.
+**SAUDAÇÕES tech recruiter! 👋**
+
+Bem-vindo ao **EXECUTIVA SERVICE** - uma aplicação web profissional de gerenciamento de tarefas desenvolvida especificamente para escritórios de advocacia. Este projeto demonstra habilidades em desenvolvimento full-stack com foco em design elegante, segurança e experiência do usuário.
+
+## 🎯 Sobre o Projeto
+
+O **EXECUTIVA SERVICE** é uma plataforma de gestão de tarefas que simula os serviços de uma secretária jurídica remota. A aplicação oferece uma interface elegante e profissional, perfeita para o ambiente corporativo jurídico, com design minimalista em preto, branco e detalhes dourados.
+
+### 🎨 Design Philosophy
+- **Elegância Profissional**: Design limpo e sofisticado adequado para advocacia
+- **Tipografia Formal**: Uso de fontes serifadas (Crimson Text + Playfair Display)
+- **Paleta Corporativa**: Preto, branco e detalhes dourados
+- **UX Intuitiva**: Interface responsiva e acessível
 
 ## 🚀 Tecnologias Utilizadas
 
-### Backend
-- Node.js
-- Express
-- TypeScript
-- Prisma ORM
-- PostgreSQL
-- JWT (JSON Web Tokens)
-- bcrypt
+### Backend (Node.js + TypeScript)
+- **Node.js** v18+ - Runtime JavaScript
+- **Express.js** v5.1.0 - Framework web
+- **TypeScript** v5.9.3 - Tipagem estática
+- **Prisma** v6.17.1 - ORM moderno e type-safe
+- **PostgreSQL** - Banco de dados relacional
+- **JWT** - Autenticação stateless
+- **bcrypt** - Criptografia de senhas
+- **CORS** - Configuração de políticas de origem
 
-### Frontend
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- Axios
-- React Router
+### Frontend (React + TypeScript)
+- **React** v19.1.1 - Biblioteca de interface
+- **TypeScript** v5.9.3 - Tipagem estática
+- **Vite** v7.1.7 - Build tool moderna
+- **Tailwind CSS** v4.1.14 - Framework CSS utility-first
+- **React Router** v7.9.4 - Roteamento SPA
+- **Axios** v1.12.2 - Cliente HTTP
+- **Google Fonts** - Tipografia profissional
+
+### DevOps & Deploy
+- **Railway** - Deploy do backend (PostgreSQL + Node.js)
+- **Vercel** - Deploy do frontend (React)
+- **GitHub** - Controle de versão
 
 ## 📋 Pré-requisitos
 
-- Node.js (versão 18 ou superior)
-- PostgreSQL (versão 12 ou superior)
-- npm ou yarn
+Antes de começar, certifique-se de ter instalado:
 
-## 🔧 Instalação e Configuração
+- **Node.js** (versão 18 ou superior)
+- **npm** ou **yarn**
+- **PostgreSQL** (versão 12 ou superior)
+- **Git**
 
-### 1. Clone o repositório
+## 🛠️ Como Executar o Projeto
 
+### 1. Clone o Repositório
 ```bash
 git clone https://github.com/MarcioJR-dev/DesafioTecnico-ExecutivaService.git
 cd DesafioTecnico-ExecutivaService
@@ -46,36 +67,42 @@ cd backend
 npm install
 
 # Configurar variáveis de ambiente
-# Copie o arquivo .env.example e renomeie para .env
-# Edite o arquivo .env com suas configurações do PostgreSQL
+cp env.example .env
+```
 
-# Exemplo de configuração no .env:
-# DATABASE_URL="postgresql://usuario:senha@localhost:5432/taskmanager"
-# JWT_SECRET="sua-chave-secreta-aqui"
-# PORT=3001
+**Configure o arquivo `.env` com suas credenciais:**
+```env
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/executivaservice"
+JWT_SECRET="sua-chave-secreta-super-segura-aqui"
+PORT=3001
+NODE_ENV="development"
+FRONTEND_URL="http://localhost:5173"
+```
 
-# Criar o banco de dados no PostgreSQL
-# Execute no psql ou pgAdmin:
-# CREATE DATABASE taskmanager;
+**Criar o banco de dados:**
+```sql
+-- Execute no PostgreSQL
+CREATE DATABASE executivaservice;
+```
 
-# Executar migrations do Prisma
-npm run prisma:migrate
-
+**Executar migrations do Prisma:**
+```bash
 # Gerar o Prisma Client
 npm run prisma:generate
 
-# Iniciar o servidor de desenvolvimento
+# Executar migrations
+npm run prisma:migrate
+
+# Iniciar o servidor
 npm run dev
 ```
 
-O backend estará rodando em `http://localhost:3001`
+✅ **Backend rodando em:** `http://localhost:3001`
 
 ### 3. Configuração do Frontend
 
-Abra um novo terminal:
-
 ```bash
-# Entrar na pasta do frontend
+# Abrir novo terminal na pasta raiz
 cd frontend
 
 # Instalar dependências
@@ -85,204 +112,188 @@ npm install
 npm run dev
 ```
 
-O frontend estará rodando em `http://localhost:5173`
+✅ **Frontend rodando em:** `http://localhost:5173`
 
 ## 📁 Estrutura do Projeto
 
 ```
-EXECUTIVASERVICE/
-├── backend/
-│   ├── prisma/
-│   │   └── schema.prisma
-│   ├── src/
-│   │   ├── controllers/
-│   │   │   ├── AuthController.ts
-│   │   │   └── TaskController.ts
-│   │   ├── middlewares/
-│   │   │   ├── authMiddleware.ts
-│   │   │   └── errorHandler.ts
-│   │   ├── routes/
-│   │   │   ├── authRoutes.ts
-│   │   │   └── taskRoutes.ts
-│   │   ├── utils/
-│   │   │   └── prisma.ts
-│   │   └── server.ts
-│   ├── .env
-│   ├── package.json
-│   └── tsconfig.json
+EXECUTIVA SERVICE/
+├── 📁 backend/                    # API Node.js + TypeScript
+│   ├── 📁 prisma/                # Schema e migrations
+│   │   ├── schema.prisma         # Modelos de dados
+│   │   └── migrations/           # Histórico de mudanças do DB
+│   ├── 📁 src/
+│   │   ├── 📁 controllers/       # Lógica de negócio
+│   │   ├── 📁 middlewares/       # Autenticação, logs, erros
+│   │   ├── 📁 routes/           # Definição de rotas
+│   │   ├── 📁 config/           # Configurações (CORS, etc)
+│   │   ├── 📁 utils/            # Utilitários e validações
+│   │   └── server.ts            # Servidor principal
+│   └── package.json
 │
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.tsx
-│   │   │   ├── PrivateRoute.tsx
-│   │   │   ├── TaskCard.tsx
-│   │   │   └── TaskForm.tsx
-│   │   ├── context/
-│   │   │   └── AuthContext.tsx
-│   │   ├── pages/
-│   │   │   ├── LoginPage.tsx
-│   │   │   ├── SignupPage.tsx
-│   │   │   └── DashboardPage.tsx
-│   │   ├── services/
-│   │   │   ├── api.ts
-│   │   │   ├── authService.ts
-│   │   │   └── taskService.ts
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   ├── package.json
-│   └── vite.config.ts
+├── 📁 frontend/                   # React + TypeScript
+│   ├── 📁 src/
+│   │   ├── 📁 components/        # Componentes reutilizáveis
+│   │   │   ├── ConfirmModal.tsx  # Modal de confirmação elegante
+│   │   │   ├── Toast.tsx         # Notificações personalizadas
+│   │   │   ├── Navbar.tsx        # Barra de navegação
+│   │   │   └── ...
+│   │   ├── 📁 pages/            # Páginas da aplicação
+│   │   ├── 📁 hooks/            # Custom hooks (useToast, useConfirmModal)
+│   │   ├── 📁 services/         # Comunicação com API
+│   │   ├── 📁 context/          # Context API (AuthContext)
+│   │   └── 📁 types/            # Definições TypeScript
+│   └── package.json
 │
 └── README.md
 ```
 
-## 🔌 Endpoints da API
+## 🔌 API Endpoints
 
-### Autenticação
+### 🔐 Autenticação
 
-#### POST `/api/auth/signup`
-Cadastrar novo usuário
+| Método | Endpoint | Descrição | Body |
+|--------|----------|-----------|------|
+| `POST` | `/api/auth/signup` | Cadastrar usuário | `{ nome, email, password }` |
+| `POST` | `/api/auth/signin` | Login | `{ email, password }` |
 
-**Body:**
-```json
-{
-  "nome": "Nome do Usuário",
-  "email": "usuario@email.com",
-  "password": "senha123"
-}
-```
+### 📝 Tarefas (Requerem JWT)
 
-#### POST `/api/auth/signin`
-Fazer login
+| Método | Endpoint | Descrição | Headers |
+|--------|----------|-----------|---------|
+| `GET` | `/api/tasks` | Listar tarefas | `Authorization: Bearer {token}` |
+| `POST` | `/api/tasks` | Criar tarefa | `Authorization: Bearer {token}` |
+| `GET` | `/api/tasks/:id` | Buscar tarefa | `Authorization: Bearer {token}` |
+| `PUT` | `/api/tasks/:id` | Atualizar tarefa | `Authorization: Bearer {token}` |
+| `DELETE` | `/api/tasks/:id` | Excluir tarefa | `Authorization: Bearer {token}` |
 
-**Body:**
-```json
-{
-  "email": "usuario@email.com",
-  "password": "senha123"
-}
-```
+### 🏥 Health Check
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/health` | Status do servidor |
 
-**Response:**
-```json
-{
-  "token": "jwt_token_aqui",
-  "user": {
-    "id": "uuid",
-    "email": "usuario@email.com",
-    "nome": "Nome do Usuário"
-  }
-}
-```
+## ✨ Funcionalidades Implementadas
 
-### Tarefas (Rotas Protegidas - Requerem Token JWT)
+### 🔐 Sistema de Autenticação
+- ✅ **Cadastro seguro** com validações
+- ✅ **Login com JWT** e expiração de token
+- ✅ **Proteção de rotas** no backend e frontend
+- ✅ **Criptografia de senhas** com bcrypt
+- ✅ **Logout seguro**
 
-Adicione o header em todas as requisições de tarefas:
-```
-Authorization: Bearer {seu_token_jwt}
-```
+### 📋 Gerenciamento de Tarefas
+- ✅ **CRUD completo** de tarefas
+- ✅ **Organização por status** (Pendente, Em Andamento, Concluída)
+- ✅ **Interface drag-and-drop** visual
+- ✅ **Validações em tempo real**
+- ✅ **Histórico de datas** (criação e conclusão)
 
-#### GET `/api/tasks`
-Listar todas as tarefas do usuário
+### 🎨 Interface e UX
+- ✅ **Design responsivo** (mobile-first)
+- ✅ **Tipografia profissional** (serifadas)
+- ✅ **Sistema de toast** personalizado
+- ✅ **Modal de confirmação** elegante
+- ✅ **Loading states** e feedback visual
+- ✅ **Animações suaves** e transições
 
-#### POST `/api/tasks`
-Criar nova tarefa
+### 🛡️ Segurança e Qualidade
+- ✅ **Validações de entrada** robustas
+- ✅ **Tratamento de erros** com códigos HTTP
+- ✅ **CORS configurado** para produção
+- ✅ **TypeScript** em todo o projeto
+- ✅ **Padrões de commit** semânticos
 
-**Body:**
-```json
-{
-  "titulo": "Título da tarefa",
-  "descricao": "Descrição detalhada",
-  "status": "PENDENTE"
-}
-```
+## 🚀 Deploy em Produção
 
-Status possíveis: `PENDENTE`, `EM_ANDAMENTO`, `CONCLUIDA`
+### Backend (Railway)
+- **URL:** `https://desafiotecnico-executivaservice-production.up.railway.app`
+- **Banco:** PostgreSQL gerenciado pelo Railway
+- **Variáveis de ambiente** configuradas no dashboard
 
-#### GET `/api/tasks/:id`
-Buscar tarefa por ID
+### Frontend (Vercel)
+- **URL:** `https://desafio-tecnico-executiva-service.vercel.app`
+- **Deploy automático** via GitHub
+- **Configuração de roteamento** para SPA
 
-#### PUT `/api/tasks/:id`
-Atualizar tarefa
+## 🧪 Como Testar
 
-**Body:**
-```json
-{
-  "titulo": "Novo título",
-  "descricao": "Nova descrição",
-  "status": "CONCLUIDA",
-  "dataConclusao": "2025-10-17T12:00:00Z"
-}
-```
+1. **Acesse:** `http://localhost:5173`
+2. **Cadastre-se** com seus dados
+3. **Faça login** na aplicação
+4. **Explore o dashboard** e crie algumas tarefas
+5. **Teste as funcionalidades:**
+   - Criar/editar/excluir tarefas
+   - Alterar status das tarefas
+   - Modal de confirmação
+   - Sistema de notificações
 
-#### DELETE `/api/tasks/:id`
-Excluir tarefa
+## 📊 Stack de Desenvolvimento
 
-## 🎨 Funcionalidades
+### 🔧 Ferramentas de Desenvolvimento
+- **ESLint** - Linting de código
+- **Prettier** - Formatação automática
+- **TypeScript** - Tipagem estática
+- **Git** - Controle de versão
 
-### Autenticação
-- ✅ Cadastro de usuário com validações
-- ✅ Login com JWT
-- ✅ Proteção de rotas
-- ✅ Logout
+### 📦 Gerenciamento de Dependências
+- **npm** - Package manager
+- **package-lock.json** - Lock de versões
 
-### Gerenciamento de Tarefas
-- ✅ Criar tarefa
-- ✅ Listar tarefas (organizadas por status)
-- ✅ Editar tarefa
-- ✅ Excluir tarefa
-- ✅ Alterar status da tarefa
-- ✅ Visualização em colunas (Pendente, Em Andamento, Concluída)
+### 🗄️ Banco de Dados
+- **PostgreSQL** - Banco relacional robusto
+- **Prisma** - ORM moderno com type-safety
+- **Migrations** - Versionamento do schema
 
-### Segurança
-- ✅ Senhas criptografadas com bcrypt
-- ✅ Tokens JWT com expiração
-- ✅ Validações de entrada
-- ✅ Tratamento de erros com códigos HTTP apropriados
-- ✅ Proteção de rotas no backend e frontend
+## 🎯 Diferenciais Técnicos
 
-## 🛠️ Scripts Disponíveis
+### 🏗️ Arquitetura
+- **Separação clara** entre backend e frontend
+- **Padrão MVC** no backend
+- **Componentização** no frontend
+- **Custom hooks** para lógica reutilizável
 
-### Backend
-```bash
-npm run dev          # Inicia servidor em modo desenvolvimento
-npm run build        # Compila TypeScript para JavaScript
-npm start            # Inicia servidor em produção
-npm run prisma:migrate  # Executa migrations do Prisma
-npm run prisma:generate # Gera Prisma Client
-```
+### 🔒 Segurança
+- **JWT** para autenticação stateless
+- **bcrypt** para hash de senhas
+- **Validações** em todas as entradas
+- **CORS** configurado adequadamente
 
-### Frontend
-```bash
-npm run dev          # Inicia servidor de desenvolvimento
-npm run build        # Cria build de produção
-npm run preview      # Preview do build de produção
-```
-
-## 🧪 Testando a Aplicação
-
-1. Acesse `http://localhost:5173` no navegador
-2. Crie uma nova conta na tela de cadastro
-3. Faça login com suas credenciais
-4. Gerencie suas tarefas no dashboard
+### 🎨 Design System
+- **Design tokens** consistentes
+- **Componentes reutilizáveis**
+- **Sistema de cores** corporativo
+- **Tipografia** profissional
 
 ## 📝 Padrões de Commit
 
-Este projeto segue o padrão de commits semânticos:
+Este projeto segue **Conventional Commits**:
 
-- `feat`: Nova funcionalidade
-- `fix`: Correção de bug
-- `chore`: Tarefas de manutenção
-- `refactor`: Refatoração de código
-- `docs`: Documentação
-- `style`: Formatação
-- `test`: Testes
+```
+feat: adicionar nova funcionalidade
+fix: corrigir bug
+docs: atualizar documentação
+style: ajustes de formatação
+refactor: refatoração de código
+test: adicionar testes
+chore: tarefas de manutenção
+```
 
 ## 👨‍💻 Desenvolvedor
 
-Márcio Junior
+**Márcio Junior**  
+*Full Stack Developer*
+
+- 🎯 **Foco:** Desenvolvimento web moderno
+- 🛠️ **Stack:** Node.js, React, TypeScript, PostgreSQL
+- 🎨 **Design:** Interfaces elegantes e funcionais
+- 🔒 **Segurança:** Boas práticas de desenvolvimento seguro
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido como parte de um desafio técnico.
+Este projeto foi desenvolvido como parte de um **desafio técnico** para demonstração de habilidades em desenvolvimento full-stack.
 
+---
+
+**Obrigado pela oportunidade de apresentar este projeto! 🚀**
+
+*Para dúvidas ou sugestões, sinta-se à vontade para entrar em contato.*
