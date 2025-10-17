@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useToast } from '../hooks/useToast';
 import type { Task, TaskStatus } from '../types/task';
 
 interface TaskFormProps {
@@ -11,6 +12,7 @@ export const TaskForm = ({ task, onSubmit, onCancel }: TaskFormProps) => {
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
   const [status, setStatus] = useState<TaskStatus>('PENDENTE');
+  const { showError } = useToast();
 
   useEffect(() => {
     if (task) {
@@ -23,23 +25,25 @@ export const TaskForm = ({ task, onSubmit, onCancel }: TaskFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!titulo.trim() || !descricao.trim()) {
-      alert('Título e descrição são obrigatórios');
+      showError('Título e descrição são obrigatórios');
       return;
     }
     onSubmit({ titulo, descricao, status });
-    setTitulo('');
-    setDescricao('');
-    setStatus('PENDENTE');
+    if (!task) {
+      setTitulo('');
+      setDescricao('');
+      setStatus('PENDENTE');
+    }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6 border border-gray-200">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
-        {task ? 'Editar Tarefa' : 'Nova Tarefa'}
+    <div>
+      <h2 className="text-2xl font-bold mb-6 text-black border-b-2 border-gold pb-2">
+        {task ? 'EDITAR TAREFA' : 'NOVA TAREFA'}
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="titulo" className="block text-sm font-semibold text-black mb-2 uppercase tracking-wide">
             Título
           </label>
           <input
@@ -47,14 +51,14 @@ export const TaskForm = ({ task, onSubmit, onCancel }: TaskFormProps) => {
             id="titulo"
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field"
             placeholder="Digite o título da tarefa"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="descricao" className="block text-sm font-semibold text-black mb-2 uppercase tracking-wide">
             Descrição
           </label>
           <textarea
@@ -62,42 +66,42 @@ export const TaskForm = ({ task, onSubmit, onCancel }: TaskFormProps) => {
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
             rows={4}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field resize-none"
             placeholder="Digite a descrição da tarefa"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="status" className="block text-sm font-semibold text-black mb-2 uppercase tracking-wide">
             Status
           </label>
           <select
             id="status"
             value={status}
             onChange={(e) => setStatus(e.target.value as TaskStatus)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-field"
           >
-            <option value="PENDENTE">Pendente</option>
-            <option value="EM_ANDAMENTO">Em Andamento</option>
-            <option value="CONCLUIDA">Concluída</option>
+            <option value="PENDENTE">PENDENTE</option>
+            <option value="EM_ANDAMENTO">EM ANDAMENTO</option>
+            <option value="CONCLUIDA">CONCLUÍDA</option>
           </select>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-4">
           <button
             type="submit"
-            className="flex-1 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-200 font-semibold"
+            className="flex-1 btn-primary"
           >
-            {task ? 'Atualizar' : 'Criar'}
+            {task ? 'ATUALIZAR' : 'CRIAR TAREFA'}
           </button>
           {task && (
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-200 font-semibold"
+              className="flex-1 btn-secondary"
             >
-              Cancelar
+              CANCELAR
             </button>
           )}
         </div>
