@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes';
 import taskRoutes from './routes/taskRoutes';
 import { errorHandler } from './middlewares/errorHandler';
+import { logger } from './middlewares/logger';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3001;
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(logger);
 
 // Rotas
 app.use('/api/auth', authRoutes);
