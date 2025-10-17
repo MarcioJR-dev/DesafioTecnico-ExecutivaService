@@ -3,6 +3,8 @@ import { Navbar } from '../components/Navbar';
 import { TaskCard } from '../components/TaskCard';
 import { TaskForm } from '../components/TaskForm';
 import { taskService } from '../services/taskService';
+import { useAuth } from '../context/AuthContext';
+import { useToast } from '../hooks/useToast';
 import type { Task, TaskStatus } from '../types/task';
 
 export const DashboardPage = () => {
@@ -10,7 +12,8 @@ export const DashboardPage = () => {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const { user, logout } = useAuth();
+  const { showSuccess, showError } = useToast();
 
   useEffect(() => {
     loadTasks();
@@ -22,7 +25,7 @@ export const DashboardPage = () => {
       const data = await taskService.getAll();
       setTasks(data);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Erro ao carregar tarefas');
+      showError(err.response?.data?.error || 'Erro ao carregar tarefas');
     } finally {
       setLoading(false);
     }
@@ -33,8 +36,9 @@ export const DashboardPage = () => {
       await taskService.create(data);
       await loadTasks();
       setShowForm(false);
+      showSuccess('Tarefa criada com sucesso!');
     } catch (err: any) {
-      alert(err.response?.data?.error || 'Erro ao criar tarefa');
+      showError(err.response?.data?.error || 'Erro ao criar tarefa');
     }
   };
 
@@ -45,8 +49,9 @@ export const DashboardPage = () => {
       await taskService.update(editingTask.id, data);
       await loadTasks();
       setEditingTask(null);
+      showSuccess('Tarefa atualizada com sucesso!');
     } catch (err: any) {
-      alert(err.response?.data?.error || 'Erro ao atualizar tarefa');
+      showError(err.response?.data?.error || 'Erro ao atualizar tarefa');
     }
   };
 
@@ -56,8 +61,9 @@ export const DashboardPage = () => {
     try {
       await taskService.delete(id);
       await loadTasks();
+      showSuccess('Tarefa excluída com sucesso!');
     } catch (err: any) {
-      alert(err.response?.data?.error || 'Erro ao excluir tarefa');
+      showError(err.response?.data?.error || 'Erro ao excluir tarefa');
     }
   };
 
@@ -66,8 +72,9 @@ export const DashboardPage = () => {
       const dataConclusao = status === 'CONCLUIDA' ? new Date().toISOString() : null;
       await taskService.update(id, { status, dataConclusao });
       await loadTasks();
+      showSuccess('Status da tarefa atualizado!');
     } catch (err: any) {
-      alert(err.response?.data?.error || 'Erro ao atualizar status');
+      showError(err.response?.data?.error || 'Erro ao atualizar status');
     }
   };
 
@@ -91,64 +98,112 @@ export const DashboardPage = () => {
       <Navbar />
 
       <div className="container mx-auto px-4 py-8">
+        {/* Header */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-800">Minhas Tarefas</h2>
+            <div>
+              <h1 className="text-4xl font-bold text-black mb-2">Painel Executivo</h1>
+              <p className="text-gray-600">Bem-vindo, {user?.nome}</p>
+            </div>
             <button
               onClick={() => {
                 setShowForm(!showForm);
                 setEditingTask(null);
               }}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition duration-200 font-semibold"
+              className="btn-primary"
             >
-              {showForm ? 'Cancelar' : '+ Nova Tarefa'}
+              {showForm ? 'CANCELAR' : '+ NOVA TAREFA'}
             </button>
           </div>
 
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-              {error}
-            </div>
-          )}
-
           {(showForm || editingTask) && (
-            <TaskForm
-              task={editingTask}
-              onSubmit={editingTask ? handleUpdateTask : handleCreateTask}
-              onCancel={handleCancelEdit}
-            />
+            <div className="card p-6 mb-6">
+              <TaskForm
+                task={editingTask}
+                onSubmit={editingTask ? handleUpdateTask : handleCreateTask}
+                onCancel={handleCancelEdit}
+              />
+            </div>
           )}
         </div>
 
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="card p-6">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-yellow-100 flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Pendentes</p>
+                <p className="text-2xl font-bold text-black">{filteredTasks.pendente.length}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="card p-6">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-blue-100 flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Em Andamento</p>
+                <p className="text-2xl font-bold text-black">{filteredTasks.emAndamento.length}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="card p-6">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-green-100 flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Concluídas</p>
+                <p className="text-2xl font-bold text-black">{filteredTasks.concluida.length}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tasks Board */}
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
             <p className="mt-4 text-gray-600">Carregando tarefas...</p>
           </div>
         ) : tasks.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg shadow">
-            <svg
-              className="mx-auto h-12 w-12 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="text-center py-12 card">
+            <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 flex items-center justify-center">
+              <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm2 2a1 1 0 000 2h2a1 1 0 000-2H5zm4 0a1 1 0 000 2h2a1 1 0 000-2H9zm4 0a1 1 0 000 2h2a1 1 0 000-2h-2z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-black mb-2">Nenhuma tarefa encontrada</h3>
+            <p className="text-gray-600 mb-4">Comece criando sua primeira tarefa.</p>
+            <button
+              onClick={() => setShowForm(true)}
+              className="btn-primary"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-              />
-            </svg>
-            <h3 className="mt-2 text-lg font-medium text-gray-900">Nenhuma tarefa</h3>
-            <p className="mt-1 text-gray-500">Comece criando uma nova tarefa.</p>
+              CRIAR PRIMEIRA TAREFA
+            </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Pendentes */}
             <div>
-              <h3 className="text-lg font-semibold text-yellow-700 mb-3">
-                Pendentes ({filteredTasks.pendente.length})
-              </h3>
+              <div className="flex items-center mb-4">
+                <div className="w-4 h-4 bg-yellow-600 mr-3"></div>
+                <h3 className="text-lg font-semibold text-black uppercase tracking-wide">
+                  Pendentes ({filteredTasks.pendente.length})
+                </h3>
+              </div>
               <div className="space-y-4">
                 {filteredTasks.pendente.map((task) => (
                   <TaskCard
@@ -162,10 +217,14 @@ export const DashboardPage = () => {
               </div>
             </div>
 
+            {/* Em Andamento */}
             <div>
-              <h3 className="text-lg font-semibold text-blue-700 mb-3">
-                Em Andamento ({filteredTasks.emAndamento.length})
-              </h3>
+              <div className="flex items-center mb-4">
+                <div className="w-4 h-4 bg-blue-600 mr-3"></div>
+                <h3 className="text-lg font-semibold text-black uppercase tracking-wide">
+                  Em Andamento ({filteredTasks.emAndamento.length})
+                </h3>
+              </div>
               <div className="space-y-4">
                 {filteredTasks.emAndamento.map((task) => (
                   <TaskCard
@@ -179,10 +238,14 @@ export const DashboardPage = () => {
               </div>
             </div>
 
+            {/* Concluídas */}
             <div>
-              <h3 className="text-lg font-semibold text-green-700 mb-3">
-                Concluídas ({filteredTasks.concluida.length})
-              </h3>
+              <div className="flex items-center mb-4">
+                <div className="w-4 h-4 bg-green-600 mr-3"></div>
+                <h3 className="text-lg font-semibold text-black uppercase tracking-wide">
+                  Concluídas ({filteredTasks.concluida.length})
+                </h3>
+              </div>
               <div className="space-y-4">
                 {filteredTasks.concluida.map((task) => (
                   <TaskCard

@@ -44,13 +44,8 @@ export const SignupPage = () => {
       <div className="hidden lg:flex lg:w-1/2 bg-black flex-col justify-center items-center p-12">
         <div className="text-center">
           <div className="mb-8">
-            <div className="w-20 h-20 mx-auto mb-6 bg-gold flex items-center justify-center">
-              <svg className="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm2 2a1 1 0 000 2h2a1 1 0 000-2H5zm4 0a1 1 0 000 2h2a1 1 0 000-2H9zm4 0a1 1 0 000 2h2a1 1 0 000-2h-2z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <h1 className="text-4xl font-bold text-white mb-4">EXECUTIVA SERVICE</h1>
-            <div className="w-24 h-1 bg-gold mx-auto mb-6"></div>
+            <h1 className="text-5xl font-bold text-white mb-6 tracking-wider">EXECUTIVA SERVICE</h1>
+            <div className="w-32 h-1 bg-gold mx-auto mb-6"></div>
             <p className="text-gray-300 text-lg leading-relaxed max-w-md">
               Junte-se a nós e transforme a gestão do seu escritório jurídico com nossos serviços especializados.
             </p>
@@ -63,12 +58,7 @@ export const SignupPage = () => {
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8">
-            <div className="w-16 h-16 mx-auto mb-4 bg-black flex items-center justify-center">
-              <svg className="w-10 h-10 text-gold" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm2 2a1 1 0 000 2h2a1 1 0 000-2H5zm4 0a1 1 0 000 2h2a1 1 0 000-2H9zm4 0a1 1 0 000 2h2a1 1 0 000-2h-2z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold text-black">EXECUTIVA SERVICE</h2>
+            <h2 className="text-3xl font-bold text-black tracking-wider">EXECUTIVA SERVICE</h2>
           </div>
 
           <div className="mb-8">
