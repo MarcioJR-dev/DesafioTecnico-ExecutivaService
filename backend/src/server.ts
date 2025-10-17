@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes';
 import taskRoutes from './routes/taskRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 import { logger } from './middlewares/logger';
+import { corsConfig } from './config/cors';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middlewares
-app.use(cors());
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(logger);
 
