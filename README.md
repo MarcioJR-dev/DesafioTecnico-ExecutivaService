@@ -72,7 +72,7 @@ cp env.example .env
 **Configure o arquivo `.env` com suas credenciais:**
 ```env
 DATABASE_URL="postgresql://usuario:senha@localhost:5432/executivaservice"
-JWT_SECRET="sua-chave-secreta-super-segura-aqui"
+JWT_SECRET="4a945ddeb05d0ec072b6d1b7a5dd3b0afb3b3eb1d11fa77720e55470b500e3b22ce543edd34c249850a6a59746247d83f39bc56ac2c29bdd5861abc2638e4f98"
 PORT=3001
 NODE_ENV="development"
 FRONTEND_URL="http://localhost:5173"
